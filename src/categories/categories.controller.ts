@@ -9,6 +9,7 @@ interface Category {
 @Controller('categories')
 export class CategoriesController {
   constructor(private categoryService: CategoriesService) {}
+  
   @Get()
   getAll(): Category[] {
     return this.categoryService.getAll();
