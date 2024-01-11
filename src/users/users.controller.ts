@@ -8,12 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-
-interface UserDto {
-  id: number;
-  firstName: string;
-  lastName: string;
-}
+import { UserDto } from './dtos/User.dto';
 
 @Controller('users')
 export class UsersController {
@@ -34,5 +29,6 @@ export class UsersController {
   @Put(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() user: UserDto) {
     const updateUser = this.userService.update(id, user);
+    return updateUser
   }
 }
