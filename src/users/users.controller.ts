@@ -6,6 +6,8 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UserDto } from './dtos/User.dto';
@@ -21,6 +23,7 @@ export class UsersController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe())
   create(@Body() user: UserDto): Promise<UserDto> {
     const newUser = this.userService.create(user);
     return newUser;

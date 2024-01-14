@@ -3,11 +3,13 @@ import {
   Post,
   Body,
   UsePipes,
-  ValidationPipe
+  ValidationPipe,
+  UseGuards
 } from '@nestjs/common';
 import { AuthService } from './auth.service'
-import { AuthDto, LoginDto } from './dtos/Auth.dto'
+import { LoginDto } from './dtos/Auth.dto'
 import { Token } from './types';
+import { AuthGuard } from '@nestjs/passport';
 
 
 @Controller('auth')
@@ -27,5 +29,11 @@ export class AuthController {
   signup(@Body() user: LoginDto): Promise<LoginDto> {
     const users = this.authService.signup(user);
     return users;
+  }
+
+  @Post('test')
+  @UseGuards(AuthGuard())
+  test () {
+    return 'ddddddd'
   }
 }
