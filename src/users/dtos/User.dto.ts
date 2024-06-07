@@ -6,4 +6,5 @@ export class UserDto {
 
   @IsNotEmpty()
   hash: string;
+
 }

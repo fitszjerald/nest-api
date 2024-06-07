@@ -11,7 +11,9 @@ export class UsersService {
   ) {}
 
   getAll(): Promise<UserDto[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      relations: ['profile', 'role']
+    });
   }
 
   async create(user: UserDto): Promise<any> {
@@ -22,6 +24,6 @@ export class UsersService {
     return this.userRepository.update({ id }, { ...user });
   }
   async findOne(username: string): Promise<UserDto> {
-    return this.userRepository.findOne({ where: {username} });
+    return this.userRepository.findOne({ where: { username } });
   }
 }
