@@ -8,7 +8,8 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
-import { Product } from './dtos/Product.dto';
+import { CreateProductDto } from './dtos/create-product.dto';
+import { Product } from '../typeorm/entities/Product';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('products')
@@ -16,20 +17,20 @@ import { ApiTags } from '@nestjs/swagger';
 export class ProductsController {
   constructor(private productService: ProductsService) {}
   @Get()
-  getAll(): Product[] {
-    return this.productService.getAll();
+  getAll(): Promise<Product[]> {
+    const products = this.productService.getAll();
+    return products;
   }
 
   @Post('create')
   @UsePipes(new ValidationPipe())
-  create(@Body() productData: Product) {
-    console.log(productData);
-    return {};
+  create(@Body() productData: CreateProductDto) {
+    const newProduct = this.productService.create(productData);
+    return newProduct;
   }
 
   @Get(':id')
   getProductById(@Param('id') id: string) {
-    console.log(id);
     return { id };
   }
 }
