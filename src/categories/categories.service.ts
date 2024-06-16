@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import categories from './category.json';
-
-interface Category {
-  id: number;
-  name: string;
-}
+import { InjectRepository } from '@nestjs/typeorm';
+import { Category } from '../typeorm/entities/Category';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class CategoriesService {
-  getAll(): Category[] {
-    return categories;
+  constructor(
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
+  ) {}
+  getAll(): Promise<Category[]> {
+    return this.categoryRepository.find();
   }
 }

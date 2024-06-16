@@ -21,7 +21,7 @@ import { ProfilesModule } from './profiles/profiles.module';
     AuthModule,
     JwtModule,
     ProfilesModule,
-    RolesModule
+    RolesModule,
   ],
   controllers: [],
   providers: [
