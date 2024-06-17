@@ -12,7 +12,7 @@ export class UsersService {
 
   getAll(): Promise<UserDto[]> {
     return this.userRepository.find({
-      relations: ['profile', 'role']
+      relations: ['profile', 'role'],
     });
   }
 

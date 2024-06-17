@@ -7,10 +7,10 @@ import { RolesModule } from 'src/roles/roles.module';
 // import { UserMiddleware } from './middleware/user.middleware';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User]), RolesModule],
+  imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
   providers: [UsersService],
-  exports: [UsersService]
+  exports: [UsersService],
 })
 export class UsersModule {}
 // export class UsersModule implements NestModule {

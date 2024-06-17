@@ -4,21 +4,19 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
-import { AuthService } from './auth.service'
-import { LoginDto } from './dtos/Auth.dto'
+import { AuthService } from './auth.service';
+import { LoginDto } from './dtos/Auth.dto';
 import { Token } from './types';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/decorator/public.decorator';
-
 
 @ApiTags('auth')
 @Public()
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
-
 
   @Post('login')
   @UsePipes(new ValidationPipe())

@@ -14,11 +14,11 @@ export class AtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any): Promise<UserDto> {
-    const { username } = payload
-    const user =  await this.usersService.findOne(username);
+    const { username } = payload;
+    const user = await this.usersService.findOne(username);
     if (!user) {
-      throw new UnauthorizedException()
+      throw new UnauthorizedException();
     }
-    return user
+    return user;
   }
 }

@@ -13,8 +13,8 @@ import { PassportModule } from '@nestjs/passport';
     JwtModule.register({
       secret: 'at-secret',
       signOptions: {
-        expiresIn: 3600
-      }
+        expiresIn: 3600,
+      },
     }),
   ],
   controllers: [AuthController],

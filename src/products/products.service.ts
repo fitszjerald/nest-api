@@ -10,7 +10,7 @@ export class ProductsService {
     @InjectRepository(Product) private ProductRepository: Repository<Product>,
   ) {}
   getAll(): Promise<Product[]> {
-    return this.ProductRepository.find();
+    return this.ProductRepository.find({ relations: ['categories'] });
   }
 
   async create(data: CreateProductDto): Promise<Product> {

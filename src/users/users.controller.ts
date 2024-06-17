@@ -34,6 +34,6 @@ export class UsersController {
   @Put(':id')
   update(@Param('id', ParseIntPipe) id: number, @Body() user: UserDto) {
     const updateUser = this.userService.update(id, user);
-    return updateUser
+    return updateUser;
   }
 }
