@@ -4,10 +4,9 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
-  UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto } from './dtos/Auth.dto';
+import { LoginDto, RefreshToken } from './dtos/Auth.dto';
 import { Token } from './types';
 import { ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/decorator/public.decorator';
@@ -21,8 +20,8 @@ export class AuthController {
   @Post('login')
   @UsePipes(new ValidationPipe())
   login(@Body() user: LoginDto): Promise<Token> {
-    const token = this.authService.login(user);
-    return token;
+    const tokens = this.authService.login(user);
+    return tokens;
   }
 
   @Post('signup')
@@ -30,5 +29,12 @@ export class AuthController {
   signup(@Body() user: LoginDto): Promise<LoginDto> {
     const users = this.authService.signup(user);
     return users;
+  }
+
+  @Post('refresh')
+  @UsePipes(new ValidationPipe())
+  refresh(@Body() token: RefreshToken): Promise<Token> {
+    const tokens = this.authService.getRefreshToken(token);
+    return tokens;
   }
 }

@@ -20,10 +20,15 @@ export class UsersService {
     const newUser = this.userRepository.create(user);
     return this.userRepository.save(newUser);
   }
+
   update(id: number, user: UserDto) {
     return this.userRepository.update({ id }, { ...user });
   }
-  async findOne(username: string): Promise<UserDto> {
-    return this.userRepository.findOne({ where: { username } });
+
+  async findOne(username: string): Promise<any> {
+    return this.userRepository.findOne({
+      where: { username },
+      relations: ['role'],
+    });
   }
 }

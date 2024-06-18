@@ -15,3 +15,8 @@ export class LoginDto {
   @IsNotEmpty()
   password: string;
 }
+
+export class RefreshToken {
+  @IsNotEmpty()
+  refreshToken: string;
+}
